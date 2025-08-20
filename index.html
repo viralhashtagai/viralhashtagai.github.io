@@ -2,188 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Title -->
-  <title>Viral Hashtag AI Generator | Free Trending Hashtags Tool</title>
-
-  <!-- Meta Description -->
-  <meta name="description" content="Free AI-powered viral hashtag generator for Instagram, TikTok, YouTube, Twitter, and Facebook. Create funny, sad, romantic, and motivational hashtags in English, Urdu, Hindi, and Arabic.">
-
-  <!-- Meta Keywords -->
-  <meta name="keywords" content="viral hashtag generator, free hashtag tool, TikTok hashtags, Instagram hashtags, YouTube shorts hashtags, trending hashtags, funny hashtags, sad hashtags, motivation hashtags, romantic hashtags, Urdu hashtags, Hindi hashtags, Arabic hashtags">
-
-  <!-- Open Graph (Social Media Preview) -->
-  <meta property="og:title" content="Viral Hashtag AI Generator - Free Hashtag Tool">
-  <meta property="og:description" content="Generate trending hashtags for TikTok, Instagram, YouTube & more. 100% free!">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://your-username.github.io/">
-  <meta property="og:image" content="https://your-username.github.io/preview.png">
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-    h2 {
-      margin-top: 20px;
-      font-size: 1.4rem;
-    }
-    p {
-      margin-bottom: 20px;
-    }
-    select, input {
-      padding: 10px;
-      width: 250px;
-      margin: 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      background: #ff6b6b;
-      color: white;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #ff4757;
-    }
-    #hashtags {
-      margin-top: 20px;
-    }
-    .tag {
-      display: inline-block;
-      background: white;
-      color: #333;
-      padding: 5px 12px;
-      margin: 5px;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-  </style>
+  <title>Simple Hashtag Generator</title>
 </head>
 <body>
-  <h1>🌍 Viral Hashtag AI Generator</h1>
-  <p>Generate free trending hashtags for TikTok, Instagram, YouTube, Facebook & more in your language and mood!</p>
+  <h1>Hashtag Generator</h1>
 
-  <select id="language">
-    <option value="english">English</option>
-    <option value="urdu">Urdu</option>
-    <option value="hindi">Hindi</option>
-    <option value="arabic">Arabic</option>
-  </select>
-  <br>
+  <input type="text" id="keyword" placeholder="Enter keyword...">
+  <button onclick="generate()">Generate</button>
 
-  <select id="mood">
-    <option value="funny">😂 Funny</option>
-    <option value="sad">😢 Sad</option>
-    <option value="motivation">💪 Motivation</option>
-    <option value="romantic">❤ Romantic</option>
-  </select>
-  <br>
-
-  <input type="text" id="keyword" placeholder="Enter your keyword...">
-  <br>
-
-  <button onclick="generateHashtags()">Generate</button>
-  <button onclick="copyHashtags()">Copy</button>
-
-  <div id="hashtags"></div>
-
-  <h2>Why Use This Free Hashtag Generator?</h2>
-  <p>✔ 100% Free | ✔ Viral Hashtags | ✔ Multi-Language (English, Urdu, Hindi, Arabic) | ✔ Perfect for TikTok, Instagram Reels, YouTube Shorts, Twitter & Facebook</p>
+  <div id="output"></div>
 
   <script>
-    // 🔥 Global Viral Hashtags Bank
-    const viralBank = [
-      "#viral", "#explorepage", "#fyp", "#trending", "#instagood",
-      "#reels", "#shorts", "#tiktok", "#follow", "#like", "#explore",
-      "#instadaily", "#socialmedia", "#trend", "#discover"
-    ];
+    function generate() {
+      let keyword = document.getElementById("keyword").value.trim();
+      let output = document.getElementById("output");
 
-    // shuffle helper
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function generateHashtags() {
-      const keyword = document.getElementById('keyword').value.trim();
-      const lang = document.getElementById('language').value;
-      const mood = document.getElementById('mood').value;
-      const hashtagsDiv = document.getElementById('hashtags');
-      hashtagsDiv.innerHTML = '';
-
-      if (keyword === '') {
-        hashtagsDiv.innerHTML = '<p>Please enter a keyword 🔑</p>';
+      if (keyword === "") {
+        output.innerHTML = "<p>Please enter a keyword 🔑</p>";
         return;
       }
 
-      let tags = [];
+      let viralTags = ["#viral", "#trending", "#fyp", "#explorepage", "#reels", "#shorts"];
+      let customTags = [#${keyword}, #${keyword}Life, #${keyword}Trend];
 
-      // 🔹 Mood-based hashtags
-      if (mood === "funny") {
-        tags = ["#funny", "#lol", "#meme", "#comedy", "#haha", "#jokes", "#funnymemes"];
-      } else if (mood === "sad") {
-        tags = ["#sad", "#alone", "#broken", "#heartbreak", "#pain", "#deep", "#crying"];
-      } else if (mood === "motivation") {
-        tags = ["#motivation", "#inspiration", "#success", "#nevergiveup", "#hustle", "#dreambig", "#staystrong"];
-      } else if (mood === "romantic") {
-        tags = ["#love", "#romantic", "#relationship", "#couplegoals", "#forever", "#heart", "#mylove"];
-      }
+      let final = customTags.concat(viralTags);
 
-      // 🔹 Language support (extra hashtags)
-      if (lang === "urdu") {
-        tags.push("#Urdu", "#PakistaniHashtags", "#UrduPoetry");
-      } else if (lang === "hindi") {
-        tags.push("#Hindi", "#India", "#Bollywood");
-      } else if (lang === "arabic") {
-        tags.push("#Arabic", "#العربية", "#دبي");
-      }
-
-      // 🔹 Merge everything
-      let finalTags = [
-        #${keyword}, #${keyword}${mood}, #${mood}${keyword}
-      ]
-      .concat(tags)
-      .concat(viralBank);
-
-      // shuffle + pick 12
-      finalTags = shuffleArray(finalTags).slice(0, 12);
-
-      finalTags.forEach(tag => {
-        const span = document.createElement('span');
-        span.className = 'tag';
-        span.textContent = tag;
-        hashtagsDiv.appendChild(span);
+      output.innerHTML = "";
+      final.forEach(tag => {
+        output.innerHTML += <span style="margin:5px; padding:5px; background:#ddd; border-radius:5px;">${tag}</span>;
       });
-    }
-
-    function copyHashtags() {
-      const hashtags = Array.from(document.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
-      if (hashtags === '') {
-        alert('No hashtags to copy!');
-        return;
-      }
-      navigator.clipboard.writeText(hashtags);
-      alert('Hashtags copied ✅');
     }
   </script>
 </body>

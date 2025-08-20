@@ -1,190 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Title -->
-  <title>Viral Hashtag AI Generator | Free Trending Hashtags Tool</title>
-
-  <!-- Meta Description -->
-  <meta name="description" content="Free AI-powered viral hashtag generator for Instagram, TikTok, YouTube, Twitter, and Facebook. Create funny, sad, romantic, and motivational hashtags in English, Urdu, Hindi, and Arabic.">
-
-  <!-- Meta Keywords -->
-  <meta name="keywords" content="viral hashtag generator, free hashtag tool, TikTok hashtags, Instagram hashtags, YouTube shorts hashtags, trending hashtags, funny hashtags, sad hashtags, motivation hashtags, romantic hashtags, Urdu hashtags, Hindi hashtags, Arabic hashtags">
-
-  <!-- Open Graph (Social Media Preview) -->
-  <meta property="og:title" content="Viral Hashtag AI Generator - Free Hashtag Tool">
-  <meta property="og:description" content="Generate trending hashtags for TikTok, Instagram, YouTube & more. 100% free!">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://your-username.github.io/">
-  <meta property="og:image" content="https://your-username.github.io/preview.png">
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-    h2 {
-      margin-top: 20px;
-      font-size: 1.4rem;
-    }
-    p {
-      margin-bottom: 20px;
-    }
-    select, input {
-      padding: 10px;
-      width: 250px;
-      margin: 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      background: #ff6b6b;
-      color: white;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #ff4757;
-    }
-    #hashtags {
-      margin-top: 20px;
-    }
-    .tag {
-      display: inline-block;
-      background: white;
-      color: #333;
-      padding: 5px 12px;
-      margin: 5px;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralHashtagAI - Generate Viral Hashtags Automatically</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #a55eea;
+            --accent: #fd9644;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-generate {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-copy {
+            background: var(--light-gray);
+            color: var(--dark);
+            padding: 8px 15px;
+        }
+        
+        .btn-copy:hover {
+            background: var(--light-gray);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hashtag-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .hashtag-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.2s;
+        }
+        
+        .hashtag-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .hashtag-text {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .platform-tags {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .platform-tag {
+            background: var(--light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .platform-tag.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .platform-tag:hover {
+            border-color: var(--primary);
+        }
+        
+        .trending-section {
+            margin-top: 40px;
+        }
+        
+        .trending-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .trending-item {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(108, 99, 255, 0.25);
+        }
+        
+        .counter {
+            background: white;
+            color: var(--primary);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        footer {
+            text-align: center;
+            color: var(--gray);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--success);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .result-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .result-count {
+            font-weight: 600;
+            color: var(--primary);
+        }
+    </style>
 </head>
 <body>
-  <h1>🌍 Viral Hashtag AI Generator</h1>
-  <p>Generate free trending hashtags for TikTok, Instagram, YouTube, Facebook & more in your language and mood!</p>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hashtag logo-icon"></i>
+                <h1>ViralHashtagAI</h1>
+            </div>
+            <p class="tagline">Generate high-performing, viral hashtags tailored to your content with AI-powered technology</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2 class="section-title">
+                    <i class="fas fa-magic"></i>
+                    Create Viral Hashtags
+                </h2>
+                
+                <div class="input-group">
+                    <label for="contentTopic">Content Topic/Keyword</label>
+                    <input type="text" id="contentTopic" placeholder="e.g., technology, fashion, food, travel">
+                </div>
+                
+                <div class="input-group">
+                    <label for="contentDescription">Content Description (Optional)</label>
+                    <textarea id="contentDescription" placeholder="Describe your content for more relevant hashtags..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Select Platform</label>
+                    <div class="platform-tags">
+                        <div class="platform-tag active" data-platform="all">All Platforms</div>
+                        <div class="platform-tag" data-platform="instagram">Instagram</div>
+                        <div class="platform-tag" data-platform="twitter">Twitter</div>
+                        <div class="platform-tag" data-platform="tiktok">TikTok</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hashtagCount">Number of Hashtags</label>
+                    <select id="hashtagCount">
+                        <option value="5">5 Hashtags</option>
+                        <option value="10" selected>10 Hashtags</option>
+                        <option value="15">15 Hashtags</option>
+                        <option value="20">20 Hashtags</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-generate" id="generateBtn">
+                    <i class="fas fa-sparkles"></i> Generate Viral Hashtags
+                </button>
+            </div>
+            
+            <div class="card">
+                <div class="result-info">
+                    <h2 class="section-title">
+                        <i class="fas fa-rocket"></i>
+                        Your Viral Hashtags
+                    </h2>
+                    <span class="result-count" id="resultCount">0 generated</span>
+                </div>
+                <p id="resultsHint">Enter your content details and generate hashtags to see results here.</p>
+                
+                <div class="hashtag-results" id="hashtagResults">
+                    <!-- Hashtags will be generated here -->
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-copy" id="copyAllBtn">
+                        <i class="fas fa-copy"></i> Copy All Hashtags
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card trending-section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                Currently Trending Hashtags
+            </h2>
+            
+            <div class="trending-list">
+                <div class="trending-item">
+                    <span class="counter">1</span>
+                    #ArtificialIntelligence
+                </div>
+                <div class="trending-item">
+                    <span class="counter">2</span>
+                    #TechTrends
+                </div>
+                <div class="trending-item">
+                    <span class="counter">3</span>
+                    #DigitalMarketing
+                </div>
+                <div class="trending-item">
+                    <span class="counter">4</span>
+                    #ContentCreation
+                </div>
+                <div class="trending-item">
+                    <span class="counter">5</span>
+                    #SocialMediaTips
+                </div>
+                <div class="trending-item">
+                    <span class="counter">6</span>
+                    #ViralContent
+                </div>
+                <div class="trending-item">
+                    <span class="counter">7</span>
+                    #SEO
+                </div>
+                <div class="trending-item">
+                    <span class="counter">8</span>
+                    #GrowthHacking
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ViralHashtagAI. All rights reserved.</p>
+            <p>Powered by advanced AI technology to boost your social media engagement.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
 
-  <select id="language">
-    <option value="english">English</option>
-    <option value="urdu">Urdu</option>
-    <option value="hindi">Hindi</option>
-    <option value="arabic">Arabic</option>
-  </select>
-  <br>
+    <div class="notification" id="notification">Hashtags copied to clipboard!</div>
 
-  <select id="mood">
-    <option value="funny">😂 Funny</option>
-    <option value="sad">😢 Sad</option>
-    <option value="motivation">💪 Motivation</option>
-    <option value="romantic">❤ Romantic</option>
-  </select>
-  <br>
-
-  <input type="text" id="keyword" placeholder="Enter your keyword...">
-  <br>
-
-  <button onclick="generateHashtags()">Generate</button>
-  <button onclick="copyHashtags()">Copy</button>
-
-  <div id="hashtags"></div>
-
-  <h2>Why Use This Free Hashtag Generator?</h2>
-  <p>✔ 100% Free | ✔ Viral Hashtags | ✔ Multi-Language (English, Urdu, Hindi, Arabic) | ✔ Perfect for TikTok, Instagram Reels, YouTube Shorts, Twitter & Facebook</p>
-
-  <script>
-    // 🔥 Global Viral Hashtags Bank
-    const viralBank = [
-      "#viral", "#explorepage", "#fyp", "#trending", "#instagood",
-      "#reels", "#shorts", "#tiktok", "#follow", "#like", "#explore",
-      "#instadaily", "#socialmedia", "#trend", "#discover"
-    ];
-
-    // shuffle helper
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function generateHashtags() {
-      const keyword = document.getElementById('keyword').value.trim();
-      const lang = document.getElementById('language').value;
-      const mood = document.getElementById('mood').value;
-      const hashtagsDiv = document.getElementById('hashtags');
-      hashtagsDiv.innerHTML = '';
-
-      if (keyword === '') {
-        hashtagsDiv.innerHTML = '<p>Please enter a keyword 🔑</p>';
-        return;
-      }
-
-      let tags = [];
-
-      // 🔹 Mood-based hashtags
-      if (mood === "funny") {
-        tags = ["#funny", "#lol", "#meme", "#comedy", "#haha", "#jokes", "#funnymemes"];
-      } else if (mood === "sad") {
-        tags = ["#sad", "#alone", "#broken", "#heartbreak", "#pain", "#deep", "#crying"];
-      } else if (mood === "motivation") {
-        tags = ["#motivation", "#inspiration", "#success", "#nevergiveup", "#hustle", "#dreambig", "#staystrong"];
-      } else if (mood === "romantic") {
-        tags = ["#love", "#romantic", "#relationship", "#couplegoals", "#forever", "#heart", "#mylove"];
-      }
-
-      // 🔹 Language support (extra hashtags)
-      if (lang === "urdu") {
-        tags.push("#Urdu", "#PakistaniHashtags", "#UrduPoetry");
-      } else if (lang === "hindi") {
-        tags.push("#Hindi", "#India", "#Bollywood");
-      } else if (lang === "arabic") {
-        tags.push("#Arabic", "#العربية", "#دبي");
-      }
-
-      // 🔹 Merge everything
-      let finalTags = [
-        #${keyword}, #${keyword}${mood}, #${mood}${keyword}
-      ]
-      .concat(tags)
-      .concat(viralBank);
-
-      // shuffle + pick 12
-      finalTags = shuffleArray(finalTags).slice(0, 12);
-
-      finalTags.forEach(tag => {
-        const span = document.createElement('span');
-        span.className = 'tag';
-        span.textContent = tag;
-        hashtagsDiv.appendChild(span);
-      });
-    }
-
-    function copyHashtags() {
-      const hashtags = Array.from(document.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
-      if (hashtags === '') {
-        alert('No hashtags to copy!');
-        return;
-      }
-      navigator.clipboard.writeText(hashtags);
-      alert('Hashtags copied ✅');
-    }
-  </script>
-</body>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyAllBtn = document.getElementById('copyAllBtn');
+            const platformTags = document.querySelectorAll('.platform-tag');
+            const hashtagResults = document.getElementById('hashtagResults');
+            const resultsHint = document.getElementById('resultsHint');
+            const notification = document.getElementById('notification');
+            const resultCount = document.getElementById('resultCount');
+            
+            // Platform selection
+            platformTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    platformTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Generate hashtags
+            generateBtn.addEventListener('click', function() {
+                const topic = document.getElementById('contentTopic').value.trim();
+                const description = document.getElementById('contentDescription').value.trim();
+                const count = parseInt(document.getElementById('hashtagCount').value);
+                
+                if (!topic) {
+                    showNotification('Please enter a topic or keyword for your content', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                generateBtn.innerHTML = '<span class="loading"></span> Generating...';
+                generateBtn.disabled = true;
+                
+                // Simulate API call with timeout
+                setTimeout(() => {
+                    const hashtags = generateHashtags(topic, description, count);
+                    displayHashtags(hashtags);
+                    
+                    // Reset button
+                    generateBtn.innerHTML = '<i class="fas fa-sparkles"></i> Generate Viral Hashtags';
+                    generateBtn.disabled = false;
+                    
+                    // Show success message
+                    showNotification('Hashtags generated successfully!');
+                }, 1500);
+            });
+            
+            // Copy all hashtags
+            copyAllBtn.addEventListener('click', function() {
+                const hashtagElements = document.querySelectorAll('.hashtag-text');
+                if (hashtagElements.length === 0) {
+                    showNotification('No hashtags to copy. Generate some hashtags first.', 'error');
+                    return;
+                }
+                
+                const allHashtags = Array.from(hashtagElements).map(el => el.textContent).join(' ');
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(allHashtags)
+                    .then(() => {
+                        showNotification('Hashtags copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        showNotification('Failed to copy hashtags. Please try again.', 'error');
+                    });
+            });
+            
+            // Generate hashtags based on input
+            function generateHashtags(topic, description, count) {
+                // Base hashtags based on topic
+                const baseHashtags = [
+                    #${topic.replace(/\s+/g, '')},
+                    #${topic.replace(/\s+/g, '')}Lovers,
+                    #${topic.replace(/\s+/g, '')}Life,
+                    #${topic.replace(/\s+/g, '')}Goals,
+                    #${topic.replace(/\s+/g, '')}Daily,
+                    #${topic.replace(/\s+/g, '')}Time,
+                    #${topic.replace(/\s+/g, '')}Community
+                ];
+                
+                // Additional hashtags based on description keywords
+                const additionalHashtags = [];
+                if (description) {
+                    const words = description.split(/\s+/);
+                    words.forEach(word => {
+                        if (word.length > 4) {
+                            additionalHashtags.push(#${word.replace(/\s+/g, '')});
+                        }
+                    });
+                }
+                
+                // Popular hashtags that often go viral
+                const popularHashtags = [
+                    '#Trending', '#Viral', '#Explore', '#InstaGood', '#PhotoOfTheDay',
+                    '#Follow', '#FollowMe', '#Like', '#Share', '#MustFollow', '#Daily',
+                    '#Inspiration', '#Motivation', '#Life', '#Goals', '#Dream', '#Success',
+                    '#Technology', '#Innovation', '#Design', '#Creative', '#Art', '#Photography',
+                    '#Nature', '#Travel', '#Adventure', '#Food', '#Foodie', '#Fitness', '#Health'
+                ];
+                
+                // Combine all possible hashtags
+                let allHashtags = [...new Set([...baseHashtags, ...additionalHashtags, ...popularHashtags])];

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Hashtag AI Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    main {
+      background: #fff;
+      color: #333;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #5563c1;
+    }
+    .hashtags {
+      margin-top: 20px;
+    }
+    .tag {
+      display: inline-block;
+      background: #f0f0f0;
+      color: #333;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
+    .copy-btn {
+      margin-top: 15px;
+      background: #28a745;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 20px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚀 Viral Hashtag AI Generator</h1>
+    <p>Free AI-powered tool to generate trending hashtags for Instagram, TikTok, YouTube, Twitter (X), Facebook, LinkedIn, and more.</p>
+  </header>
+
+  <main>
+    <h2>Generate Hashtags</h2>
+    <input type="text" id="keyword" placeholder="Enter your topic or keyword...">
+    <button onclick="generateHashtags()">Generate</button>
+
+    <div class="hashtags" id="hashtags"></div>
+    <button class="copy-btn" onclick="copyHashtags()">📋 Copy All</button>
+  </main>
+
+  <footer>
+    Made with ❤ | Viral Hashtag AI Generator | Free Tool
+  </footer>
+
+  <script>
+    function generateHashtags() {
+      const keyword = document.getElementById('keyword').value.trim();
+      const hashtagsDiv = document.getElementById('hashtags');
+      hashtagsDiv.innerHTML = '';
+
+      if (keyword === '') {
+        hashtagsDiv.innerHTML = '<p>Please enter a keyword 🔑</p>';
+        return;
+      }
+
+      // Example demo hashtags (AI simulation)
+      const randomTags = [
+        #${keyword},
+        #viral${keyword},
+        #${keyword}2025,
+        #trending${keyword},
+        #${keyword}love,
+        #${keyword}life,
+        #insta${keyword},
+        #${keyword}trend,
+        #${keyword}ai,
+        #${keyword}viral
+      ];
+
+      randomTags.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = tag;
+        hashtagsDiv.appendChild(span);
+      });
+    }
+
+    function copyHashtags() {
+      const hashtags = Array.from(document.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
+      if (hashtags === '') {
+        alert('No hashtags to copy!');
+        return;
+      }
+      navigator.clipboard.writeText(hashtags);
+      alert('Hashtags copied ✅');
+    }
+  </script>
+</body>
+</html>

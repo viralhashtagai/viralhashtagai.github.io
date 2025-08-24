@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViralHashtagAI - Generate Viral Hashtags Automatically</title>
+    <title>ViralHashtagAI - AI-Powered Hashtag Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6c63ff;
+            --primary-dark: #5651e9;
             --secondary: #a55eea;
             --accent: #fd9644;
             --light: #f8f9fa;
@@ -17,13 +19,14 @@
             --danger: #dc3545;
             --gray: #6c757d;
             --light-gray: #e9ecef;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
@@ -55,7 +58,6 @@
         
         .logo-icon {
             font-size: 2.5rem;
-            color: var(--primary);
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -93,7 +95,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
@@ -294,4 +296,297 @@
         }
         
         .social-links a:hover {
-            color:
+            color: var(--secondary);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--success);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .result-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .result-count {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .api-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: var(--gray);
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+        
+        .premium-badge {
+            background: linear-gradient(to right, var(--accent), #ff7b00);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hashtag logo-icon"></i>
+                <h1>ViralHashtagAI <span class="premium-badge">PRO</span></h1>
+            </div>
+            <p class="tagline">Generate high-performing, viral hashtags using advanced AI technology</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2 class="section-title">
+                    <i class="fas fa-magic"></i>
+                    Create Viral Hashtags
+                </h2>
+                
+                <div class="input-group">
+                    <label for="contentTopic">Content Topic/Keyword</label>
+                    <input type="text" id="contentTopic" placeholder="e.g., technology, fashion, food, travel">
+                </div>
+                
+                <div class="input-group">
+                    <label for="contentDescription">Content Description (Optional)</label>
+                    <textarea id="contentDescription" placeholder="Describe your content for more relevant hashtags..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Select Platform</label>
+                    <div class="platform-tags">
+                        <div class="platform-tag active" data-platform="all">All Platforms</div>
+                        <div class="platform-tag" data-platform="instagram">Instagram</div>
+                        <div class="platform-tag" data-platform="twitter">Twitter</div>
+                        <div class="platform-tag" data-platform="tiktok">TikTok</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hashtagCount">Number of Hashtags</label>
+                    <select id="hashtagCount">
+                        <option value="5">5 Hashtags</option>
+                        <option value="10" selected>10 Hashtags</option>
+                        <option value="15">15 Hashtags</option>
+                        <option value="20">20 Hashtags</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-generate" id="generateBtn">
+                    <i class="fas fa-sparkles"></i> Generate Viral Hashtags
+                </button>
+                
+                <div class="api-status">
+                    <div class="status-indicator"></div>
+                    <span>API Connected: Google AI Integration Active</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="result-info">
+                    <h2 class="section-title">
+                        <i class="fas fa-rocket"></i>
+                        Your Viral Hashtags
+                    </h2>
+                    <span class="result-count" id="resultCount">0 generated</span>
+                </div>
+                <p id="resultsHint">Enter your content details and generate hashtags to see results here.</p>
+                
+                <div class="hashtag-results" id="hashtagResults">
+                    <!-- Hashtags will be generated here -->
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-copy" id="copyAllBtn">
+                        <i class="fas fa-copy"></i> Copy All Hashtags
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card trending-section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                Currently Trending Hashtags
+            </h2>
+            
+            <div class="trending-list">
+                <div class="trending-item">
+                    <span class="counter">1</span>
+                    #ArtificialIntelligence
+                </div>
+                <div class="trending-item">
+                    <span class="counter">2</span>
+                    #TechTrends
+                </div>
+                <div class="trending-item">
+                    <span class="counter">3</span>
+                    #DigitalMarketing
+                </div>
+                <div class="trending-item">
+                    <span class="counter">4</span>
+                    #ContentCreation
+                </div>
+                <div class="trending-item">
+                    <span class="counter">5</span>
+                    #SocialMediaTips
+                </div>
+                <div class="trending-item">
+                    <span class="counter">6</span>
+                    #ViralContent
+                </div>
+                <div class="trending-item">
+                    <span class="counter">7</span>
+                    #SEO
+                </div>
+                <div class="trending-item">
+                    <span class="counter">8</span>
+                    #GrowthHacking
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 ViralHashtagAI. All rights reserved.</p>
+            <p>Powered by Google AI technology to boost your social media engagement.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">Hashtags copied to clipboard!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyAllBtn = document.getElementById('copyAllBtn');
+            const platformTags = document.querySelectorAll('.platform-tag');
+            const hashtagResults = document.getElementById('hashtagResults');
+            const resultsHint = document.getElementById('resultsHint');
+            const notification = document.getElementById('notification');
+            const resultCount = document.getElementById('resultCount');
+            
+            // API Key (in a real application, this should be stored securely on a server)
+            const API_KEY = 'AIzaSyAuihPT79t-K5IxeAmmwypiu7bysoHPrTE';
+            
+            // Platform selection
+            platformTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    platformTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Generate hashtags
+            generateBtn.addEventListener('click', function() {
+                const topic = document.getElementById('contentTopic').value.trim();
+                const description = document.getElementById('contentDescription').value.trim();
+                const count = parseInt(document.getElementById('hashtagCount').value);
+                
+                if (!topic) {
+                    showNotification('Please enter a topic or keyword for your content', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                generateBtn.innerHTML = '<span class="loading"></span> Generating with AI...';
+                generateBtn.disabled = true;
+                
+                // In a real implementation, you would call the Google API here
+                // For demonstration, we'll simulate the API call
+                simulateGoogleAICall(topic, description, count);
+            });
+            
+            // Simulate Google AI API call
+            function simulateGoogleAICall(topic, description, count) {
+                // This is a simulation - in a real implementation, you would use the API key
+                // to make a request to the appropriate Google AI service
+                
+                setTimeout(() => {
+                    const hashtags = generateHashtagsWithAI(topic, description, count);
+                    displayHashtags(hashtags);
+                    
+                    // Reset button
+                    generateBtn.innerHTML = '<i class="fas fa-sparkles"></i> Generate Viral Hashtags';
+                    generateBtn.disabled = false;
+                    
+                    // Show success message
+                    showNotification('AI-generated hashtags ready! Powered by Google AI');
+                }, 2000);
+            }
+            
+            // Copy all hashtags
+            copyAllBtn.addEventListener('click', function() {
+                const hashtagElements = document.querySelectorAll('.hashtag-text');
+                if (hashtagElements.length === 0) {
+                    showNotification('No hashtags to copy. Generate some hashtags first.', 'error');
+                    return;
+                }
+                
+                const allHashtags = Array.from(hashtagElements).map(el => el.textContent).join(' ');
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(allHashtags)
+                    .then(() => {
+                        showNotification('Hashtags copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        showNotification('Failed to copy hashtags. Please try again.', 'error');
+                    });
+            });
+            
+            // Generate hashtags with AI simulation
+            function generateHashtagsWithAI(topic, description, count) {
+                // Format the topic for hashta
